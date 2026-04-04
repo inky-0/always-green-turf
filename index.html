@@ -58,9 +58,10 @@
       position: relative; overflow: hidden; padding: 120px 40px 80px;
     }
     .hero-bg {
-      position: absolute; inset: 0;
+      position: absolute; inset: -30px;
       background: url('images/putting-pool.jpg') center/cover no-repeat;
       filter: brightness(0.35);
+      will-change: transform;
     }
     .hero-overlay {
       position: absolute; inset: 0;
@@ -574,11 +575,23 @@
     .from('.hero-btns',    { y: 24, opacity: 0, duration: 0.6, ease: 'power3.out' }, '-=0.4')
     .from('.hero-stats > div', { y: 20, opacity: 0, stagger: 0.12, duration: 0.5, ease: 'power2.out' }, '-=0.3');
 
-  /* ── Parallax on hero background ── */
+  /* ── Scroll parallax on hero background ── */
   gsap.to('.hero-bg', {
     yPercent: 25,
     ease: 'none',
     scrollTrigger: { trigger: '.hero', start: 'top top', end: 'bottom top', scrub: true }
+  });
+
+  /* ── Mouse parallax on hero background ── */
+  const heroBg = document.querySelector('.hero-bg');
+  document.querySelector('.hero').addEventListener('mousemove', e => {
+    const { innerWidth: w, innerHeight: h } = window;
+    const x = (e.clientX / w - 0.5) * 22;  // -11 to +11px
+    const y = (e.clientY / h - 0.5) * 14;  // -7  to +7px
+    gsap.to(heroBg, { x, y, duration: 1.2, ease: 'power2.out' });
+  });
+  document.querySelector('.hero').addEventListener('mouseleave', () => {
+    gsap.to(heroBg, { x: 0, y: 0, duration: 1.5, ease: 'power2.out' });
   });
 
   /* ── Stat counter animation ── */
