@@ -116,10 +116,11 @@
 
     /* ── GALLERY ── */
     .gallery-section { background: var(--black); }
-    .gallery-grid { display: grid; grid-template-columns: repeat(3, 1fr); grid-template-rows: auto; gap: 12px; margin-top: 48px; }
-    .gallery-grid img { width: 100%; height: 260px; object-fit: cover; border-radius: 10px; transition: transform .3s, filter .3s; cursor: pointer; }
+    .gallery-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; margin-top: 48px; }
+    .gallery-grid img { width: 100%; height: 240px; object-fit: cover; border-radius: 10px; transition: transform .3s, filter .3s; cursor: pointer; }
     .gallery-grid img:hover { transform: scale(1.02); filter: brightness(1.1); }
-    .gallery-grid img:first-child { grid-column: span 2; height: 360px; }
+    .gallery-grid img:first-child { grid-column: span 2; height: 340px; }
+    .gallery-grid img:nth-child(5) { grid-column: span 2; height: 300px; }
 
     /* ── WHY ── */
     .why-section { background: var(--surface); }
@@ -292,7 +293,7 @@
     <p class="section-sub">From lush residential lawns to tournament-quality putting greens, we install synthetic turf solutions built for Florida's climate and your lifestyle.</p>
     <div class="services-grid">
       <div class="service-card">
-        <img src="images/backyard-patio.jpg" alt="Residential Lawn" class="service-img">
+        <img src="images/boulder-garden-wide.jpg" alt="Residential Lawn" class="service-img">
         <div class="service-body">
           <div class="service-icon">🏡</div>
           <h3>Residential Lawn Installation</h3>
@@ -350,12 +351,18 @@
     <h2>Real Projects.<br>Real Results.</h2>
     <p class="section-sub">Every installation is custom-designed and built to last. Here's a look at some of our recent work across Southwest Florida.</p>
     <div class="gallery-grid">
-      <img src="images/putting-clean.jpg" alt="Custom Putting Green Naples FL">
-      <img src="images/lawn-install.jpg" alt="Synthetic Lawn Installation">
-      <img src="images/putting-hottub.jpg" alt="Backyard Putting Green">
-      <img src="images/backyard-patio.jpg" alt="Backyard Synthetic Turf">
-      <img src="images/putting-steppers.jpg" alt="Putting Green with Pavers">
-      <img src="images/landscape-path.jpg" alt="Turf Landscaping">
+      <img src="images/aerial-putting-pool.jpg" alt="Aerial view putting green and pool" class="gallery-tall">
+      <img src="images/boulder-garden-wide.jpg" alt="Boulder garden synthetic lawn">
+      <img src="images/backyard-hottub.jpg" alt="Backyard turf with hot tub">
+      <img src="images/turf-steppers-pool.jpg" alt="Turf with stepping stones to pool">
+      <img src="images/hillside-terrace.jpg" alt="Hillside terrace turf with mountain view">
+      <img src="images/boulder-garden-path.jpg" alt="Curved lawn with boulder retaining walls">
+      <img src="images/luxury-home-turf.jpg" alt="Luxury home large turf area">
+      <img src="images/putting-large.jpg" alt="Large custom putting green">
+      <img src="images/putting-clean.jpg" alt="Custom putting green Naples FL">
+      <img src="images/lawn-install.jpg" alt="Residential lawn installation">
+      <img src="images/landscape-path.jpg" alt="Turf landscaping with pavers">
+      <img src="images/playground.jpg" alt="Kids play area synthetic turf">
     </div>
   </div>
 </section>
@@ -365,7 +372,7 @@
   <div class="container">
     <div class="why-grid">
       <div class="why-img">
-        <img src="images/putting-large.jpg" alt="AGST Quality Installation">
+        <img src="images/hillside-terrace.jpg" alt="AGST Premium Installation">
         <div class="why-img-badge">
           <div class="big">5.0★</div>
           <div class="small">Rated on Google</div>
