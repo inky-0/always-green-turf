@@ -23,8 +23,13 @@
       --text-muted: #7a9e7a;
       --white: #ffffff;
     }
-    html { scroll-behavior: smooth; }
+    html { scroll-behavior: smooth; visibility: hidden; }
     body { font-family: 'Inter', sans-serif; background: var(--black); color: var(--text); line-height: 1.6; overflow-x: hidden; }
+
+    /* ── Animation prep — elements start invisible, GSAP reveals them ── */
+    .service-card { transform-style: preserve-3d; will-change: transform; }
+    .gallery-grid img { will-change: transform; }
+    section { isolation: isolate; }
 
     /* ── NAV ── */
     nav {
@@ -546,13 +551,139 @@
   </div>
 </footer>
 
+<!-- GSAP + ScrollTrigger -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+
 <script>
   function toggleMenu() {
     document.getElementById('mobileMenu').classList.toggle('open');
   }
-  // Sticky nav shadow on scroll
+
+  gsap.registerPlugin(ScrollTrigger);
+
+  /* ── Prevent flash of unstyled content ── */
+  document.documentElement.style.visibility = 'visible';
+
+  /* ── Hero entrance: stagger each child element in ── */
+  const heroTl = gsap.timeline({ delay: 0.1 });
+  heroTl
+    .from('.hero-badge',   { y: 30, opacity: 0, duration: 0.7, ease: 'power3.out' })
+    .from('h1',            { y: 40, opacity: 0, duration: 0.8, ease: 'power3.out' }, '-=0.4')
+    .from('.hero-sub',     { y: 30, opacity: 0, duration: 0.7, ease: 'power3.out' }, '-=0.5')
+    .from('.hero-btns',    { y: 24, opacity: 0, duration: 0.6, ease: 'power3.out' }, '-=0.4')
+    .from('.hero-stats > div', { y: 20, opacity: 0, stagger: 0.12, duration: 0.5, ease: 'power2.out' }, '-=0.3');
+
+  /* ── Parallax on hero background ── */
+  gsap.to('.hero-bg', {
+    yPercent: 25,
+    ease: 'none',
+    scrollTrigger: { trigger: '.hero', start: 'top top', end: 'bottom top', scrub: true }
+  });
+
+  /* ── Stat counter animation ── */
+  document.querySelectorAll('.stat-num').forEach(el => {
+    const text = el.textContent.trim();
+    if (text === '5.0★') {
+      ScrollTrigger.create({
+        trigger: el, start: 'top 85%', once: true,
+        onEnter: () => { gsap.from(el, { opacity: 0, scale: 0.5, duration: 0.6, ease: 'back.out(1.7)' }); }
+      });
+    } else if (text === '100%') {
+      ScrollTrigger.create({
+        trigger: el, start: 'top 85%', once: true,
+        onEnter: () => { gsap.from(el, { opacity: 0, scale: 0.5, duration: 0.6, ease: 'back.out(1.7)' }); }
+      });
+    }
+  });
+
+  /* ── Section headings slide up ── */
+  gsap.utils.toArray('.section-tag, h2, .section-sub').forEach(el => {
+    gsap.from(el, {
+      y: 40, opacity: 0, duration: 0.8, ease: 'power3.out',
+      scrollTrigger: { trigger: el, start: 'top 88%', once: true }
+    });
+  });
+
+  /* ── Service cards: stagger fan in ── */
+  gsap.from('.service-card', {
+    y: 60, opacity: 0, stagger: 0.1, duration: 0.7, ease: 'power3.out',
+    scrollTrigger: { trigger: '.services-grid', start: 'top 82%', once: true }
+  });
+
+  /* ── Service card 3D tilt on hover ── */
+  document.querySelectorAll('.service-card').forEach(card => {
+    card.addEventListener('mousemove', e => {
+      const rect = card.getBoundingClientRect();
+      const x = (e.clientX - rect.left) / rect.width  - 0.5;
+      const y = (e.clientY - rect.top)  / rect.height - 0.5;
+      gsap.to(card, { rotateY: x * 10, rotateX: -y * 10, transformPerspective: 800, duration: 0.3, ease: 'power1.out' });
+    });
+    card.addEventListener('mouseleave', () => {
+      gsap.to(card, { rotateY: 0, rotateX: 0, duration: 0.5, ease: 'power2.out' });
+    });
+  });
+
+  /* ── Gallery images: stagger reveal ── */
+  gsap.from('.gallery-grid img', {
+    scale: 0.9, opacity: 0, stagger: 0.07, duration: 0.6, ease: 'power3.out',
+    scrollTrigger: { trigger: '.gallery-grid', start: 'top 82%', once: true }
+  });
+
+  /* ── Why section: left image + right list slide in from sides ── */
+  gsap.from('.why-img', {
+    x: -60, opacity: 0, duration: 0.9, ease: 'power3.out',
+    scrollTrigger: { trigger: '.why-grid', start: 'top 80%', once: true }
+  });
+  gsap.from('.why-list .why-item', {
+    x: 50, opacity: 0, stagger: 0.12, duration: 0.7, ease: 'power3.out',
+    scrollTrigger: { trigger: '.why-list', start: 'top 82%', once: true }
+  });
+
+  /* ── Review cards: stagger ── */
+  gsap.from('.review-card', {
+    y: 50, opacity: 0, stagger: 0.12, duration: 0.7, ease: 'power3.out',
+    scrollTrigger: { trigger: '.reviews-grid', start: 'top 82%', once: true }
+  });
+
+  /* ── CTA banner: scale up ── */
+  gsap.from('.cta-section h2, .cta-section p, .cta-section .btn-primary', {
+    y: 40, opacity: 0, stagger: 0.15, duration: 0.7, ease: 'power3.out',
+    scrollTrigger: { trigger: '.cta-section', start: 'top 80%', once: true }
+  });
+
+  /* ── Contact form: slide up ── */
+  gsap.from('.contact-form', {
+    y: 60, opacity: 0, duration: 0.8, ease: 'power3.out',
+    scrollTrigger: { trigger: '.contact-form', start: 'top 85%', once: true }
+  });
+  gsap.from('.contact-item', {
+    x: -40, opacity: 0, stagger: 0.1, duration: 0.6, ease: 'power3.out',
+    scrollTrigger: { trigger: '.contact-info', start: 'top 82%', once: true }
+  });
+
+  /* ── Ambient glow orbs ── */
+  const orbs = [
+    { el: '.hero', color: 'rgba(45,122,45,0.18)', x: '75%', y: '40%', size: '500px' },
+    { el: '.services-section', color: 'rgba(76,184,76,0.08)', x: '10%', y: '60%', size: '400px' },
+    { el: '.why-section', color: 'rgba(45,122,45,0.12)', x: '80%', y: '30%', size: '450px' },
+  ];
+  orbs.forEach(o => {
+    const section = document.querySelector(o.el);
+    if (!section) return;
+    const orb = document.createElement('div');
+    orb.style.cssText = `position:absolute;top:${o.y};left:${o.x};width:${o.size};height:${o.size};
+      background:radial-gradient(circle,${o.color} 0%,transparent 70%);
+      pointer-events:none;transform:translate(-50%,-50%);border-radius:50%;z-index:0;`;
+    if (getComputedStyle(section).position === 'static') section.style.position = 'relative';
+    section.appendChild(orb);
+    /* slow float */
+    gsap.to(orb, { y: '-=30', duration: 4, yoyo: true, repeat: -1, ease: 'sine.inOut' });
+  });
+
+  /* ── Nav shadow on scroll ── */
   window.addEventListener('scroll', () => {
-    document.querySelector('nav').style.boxShadow = window.scrollY > 10 ? '0 4px 24px rgba(0,0,0,.4)' : 'none';
+    document.querySelector('nav').style.boxShadow = window.scrollY > 10 ? '0 4px 24px rgba(0,0,0,.5)' : 'none';
   });
 </script>
 </body>
