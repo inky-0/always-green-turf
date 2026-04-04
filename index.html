@@ -1,0 +1,552 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Always Green Synthetic Turf | Naples, FL</title>
+  <meta name="description" content="Premium synthetic turf installation in Naples, FL. Residential lawns, custom putting greens, pet areas, and more. Serving Southwest Florida. Call (561) 401-3257." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --green-dark: #0d2010;
+      --green-mid: #1a4a1e;
+      --green: #2d7a2d;
+      --green-light: #4cb84c;
+      --green-glow: rgba(76,184,76,0.15);
+      --black: #080e08;
+      --surface: #111a11;
+      --surface2: #182018;
+      --border: rgba(76,184,76,0.12);
+      --text: #eef5ee;
+      --text-muted: #7a9e7a;
+      --white: #ffffff;
+    }
+    html { scroll-behavior: smooth; }
+    body { font-family: 'Inter', sans-serif; background: var(--black); color: var(--text); line-height: 1.6; overflow-x: hidden; }
+
+    /* ── NAV ── */
+    nav {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 0 40px; height: 70px;
+      background: rgba(8,14,8,0.92); backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--border);
+    }
+    .nav-logo { display: flex; align-items: center; gap: 12px; }
+    .nav-logo img { height: 44px; width: auto; filter: brightness(0) invert(1); }
+    .nav-links { display: flex; gap: 32px; list-style: none; }
+    .nav-links a { color: var(--text-muted); text-decoration: none; font-size: 14px; font-weight: 500; transition: color .2s; }
+    .nav-links a:hover { color: var(--green-light); }
+    .nav-cta { background: var(--green); color: #fff !important; padding: 10px 22px; border-radius: 6px; font-weight: 600 !important; font-size: 14px !important; transition: background .2s !important; }
+    .nav-cta:hover { background: var(--green-light) !important; color: #fff !important; }
+    .hamburger { display: none; flex-direction: column; gap: 5px; background: none; border: none; cursor: pointer; padding: 4px; }
+    .hamburger span { width: 24px; height: 2px; background: var(--text); border-radius: 2px; transition: all .3s; }
+    .mobile-menu { display: none; position: fixed; top: 70px; left: 0; right: 0; background: var(--black); border-bottom: 1px solid var(--border); padding: 20px 24px; z-index: 99; }
+    .mobile-menu.open { display: flex; flex-direction: column; gap: 16px; }
+    .mobile-menu a { color: var(--text); text-decoration: none; font-size: 16px; font-weight: 500; }
+
+    /* ── HERO ── */
+    .hero {
+      min-height: 100vh; display: flex; align-items: center;
+      position: relative; overflow: hidden; padding: 120px 40px 80px;
+    }
+    .hero-bg {
+      position: absolute; inset: 0;
+      background: url('images/putting-pool.jpg') center/cover no-repeat;
+      filter: brightness(0.35);
+    }
+    .hero-overlay {
+      position: absolute; inset: 0;
+      background: linear-gradient(135deg, rgba(8,14,8,0.85) 0%, rgba(13,32,16,0.6) 100%);
+    }
+    .hero-content { position: relative; max-width: 680px; }
+    .hero-badge {
+      display: inline-flex; align-items: center; gap: 8px;
+      background: rgba(76,184,76,0.12); border: 1px solid rgba(76,184,76,0.3);
+      color: var(--green-light); padding: 6px 16px; border-radius: 100px;
+      font-size: 13px; font-weight: 600; margin-bottom: 24px;
+      letter-spacing: .04em; text-transform: uppercase;
+    }
+    .hero-badge::before { content: ''; width: 6px; height: 6px; background: var(--green-light); border-radius: 50%; }
+    h1 { font-size: clamp(2.4rem, 5vw, 3.6rem); font-weight: 900; line-height: 1.1; color: var(--white); margin-bottom: 20px; }
+    h1 span { color: var(--green-light); }
+    .hero-sub { font-size: 18px; color: rgba(238,245,238,0.75); margin-bottom: 36px; max-width: 540px; line-height: 1.7; }
+    .hero-btns { display: flex; gap: 14px; flex-wrap: wrap; }
+    .btn-primary {
+      background: var(--green); color: #fff; padding: 14px 30px;
+      border-radius: 8px; text-decoration: none; font-weight: 700; font-size: 15px;
+      transition: background .2s, transform .2s; display: inline-block;
+    }
+    .btn-primary:hover { background: var(--green-light); transform: translateY(-1px); }
+    .btn-outline {
+      border: 2px solid rgba(76,184,76,0.4); color: var(--green-light); padding: 14px 30px;
+      border-radius: 8px; text-decoration: none; font-weight: 600; font-size: 15px;
+      transition: all .2s; display: inline-block;
+    }
+    .btn-outline:hover { background: var(--green-glow); border-color: var(--green-light); }
+    .hero-stats {
+      position: relative; display: flex; gap: 40px; margin-top: 56px;
+      padding-top: 36px; border-top: 1px solid var(--border);
+    }
+    .stat-num { font-size: 2rem; font-weight: 800; color: var(--white); line-height: 1; }
+    .stat-label { font-size: 13px; color: var(--text-muted); margin-top: 4px; }
+
+    /* ── SECTION SHARED ── */
+    section { padding: 96px 40px; }
+    .container { max-width: 1160px; margin: 0 auto; }
+    .section-tag { font-size: 12px; font-weight: 700; letter-spacing: .1em; text-transform: uppercase; color: var(--green-light); margin-bottom: 12px; }
+    h2 { font-size: clamp(1.8rem, 3.5vw, 2.6rem); font-weight: 800; color: var(--white); line-height: 1.2; margin-bottom: 16px; }
+    .section-sub { font-size: 16px; color: var(--text-muted); max-width: 560px; line-height: 1.7; }
+
+    /* ── SERVICES ── */
+    .services-section { background: var(--surface); }
+    .services-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; margin-top: 52px; }
+    .service-card {
+      background: var(--surface2); border: 1px solid var(--border);
+      border-radius: 12px; overflow: hidden; transition: transform .25s, border-color .25s;
+    }
+    .service-card:hover { transform: translateY(-4px); border-color: rgba(76,184,76,0.35); }
+    .service-img { width: 100%; height: 220px; object-fit: cover; }
+    .service-body { padding: 20px 22px 24px; }
+    .service-icon { font-size: 22px; margin-bottom: 10px; }
+    .service-card h3 { font-size: 17px; font-weight: 700; color: var(--white); margin-bottom: 8px; }
+    .service-card p { font-size: 14px; color: var(--text-muted); line-height: 1.6; }
+
+    /* ── GALLERY ── */
+    .gallery-section { background: var(--black); }
+    .gallery-grid { display: grid; grid-template-columns: repeat(3, 1fr); grid-template-rows: auto; gap: 12px; margin-top: 48px; }
+    .gallery-grid img { width: 100%; height: 260px; object-fit: cover; border-radius: 10px; transition: transform .3s, filter .3s; cursor: pointer; }
+    .gallery-grid img:hover { transform: scale(1.02); filter: brightness(1.1); }
+    .gallery-grid img:first-child { grid-column: span 2; height: 360px; }
+
+    /* ── WHY ── */
+    .why-section { background: var(--surface); }
+    .why-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 64px; align-items: center; }
+    .why-img { border-radius: 16px; overflow: hidden; position: relative; }
+    .why-img img { width: 100%; height: 500px; object-fit: cover; }
+    .why-img-badge {
+      position: absolute; bottom: 20px; left: 20px;
+      background: rgba(8,14,8,0.9); border: 1px solid var(--border);
+      border-radius: 10px; padding: 14px 18px;
+    }
+    .why-img-badge .big { font-size: 28px; font-weight: 800; color: var(--green-light); }
+    .why-img-badge .small { font-size: 12px; color: var(--text-muted); }
+    .why-list { display: flex; flex-direction: column; gap: 24px; margin-top: 36px; }
+    .why-item { display: flex; gap: 16px; align-items: flex-start; }
+    .why-check {
+      width: 36px; height: 36px; min-width: 36px; border-radius: 8px;
+      background: var(--green-glow); border: 1px solid rgba(76,184,76,0.3);
+      display: flex; align-items: center; justify-content: center;
+      color: var(--green-light); font-size: 16px;
+    }
+    .why-item h4 { font-size: 15px; font-weight: 700; color: var(--white); margin-bottom: 4px; }
+    .why-item p { font-size: 13px; color: var(--text-muted); line-height: 1.6; }
+
+    /* ── TESTIMONIALS ── */
+    .testimonials-section { background: var(--black); }
+    .reviews-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; margin-top: 48px; }
+    .review-card {
+      background: var(--surface); border: 1px solid var(--border);
+      border-radius: 12px; padding: 24px 26px;
+    }
+    .stars { color: #fbbf24; font-size: 15px; letter-spacing: 2px; margin-bottom: 12px; }
+    .review-text { font-size: 14px; color: var(--text-muted); line-height: 1.7; margin-bottom: 18px; font-style: italic; }
+    .reviewer { font-size: 13px; font-weight: 700; color: var(--white); }
+    .reviewer span { color: var(--text-muted); font-weight: 400; }
+
+    /* ── CTA BANNER ── */
+    .cta-section {
+      background: linear-gradient(135deg, var(--green-mid) 0%, var(--green-dark) 100%);
+      text-align: center; padding: 80px 40px;
+    }
+    .cta-section h2 { color: var(--white); margin-bottom: 12px; }
+    .cta-section p { color: rgba(238,245,238,0.75); margin-bottom: 32px; font-size: 17px; }
+
+    /* ── CONTACT ── */
+    .contact-section { background: var(--surface); }
+    .contact-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 64px; align-items: start; }
+    .contact-info { display: flex; flex-direction: column; gap: 28px; margin-top: 36px; }
+    .contact-item { display: flex; gap: 16px; align-items: flex-start; }
+    .contact-icon {
+      width: 42px; height: 42px; min-width: 42px; background: var(--green-glow);
+      border: 1px solid rgba(76,184,76,0.25); border-radius: 10px;
+      display: flex; align-items: center; justify-content: center; font-size: 18px;
+    }
+    .contact-item h4 { font-size: 13px; font-weight: 600; color: var(--text-muted); text-transform: uppercase; letter-spacing: .06em; margin-bottom: 2px; }
+    .contact-item p, .contact-item a { font-size: 15px; color: var(--white); text-decoration: none; }
+    .contact-item a:hover { color: var(--green-light); }
+    .contact-form { background: var(--surface2); border: 1px solid var(--border); border-radius: 16px; padding: 36px; }
+    .contact-form h3 { font-size: 18px; font-weight: 700; color: var(--white); margin-bottom: 24px; }
+    .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-bottom: 16px; }
+    .form-group { display: flex; flex-direction: column; gap: 6px; margin-bottom: 16px; }
+    .form-group label { font-size: 12px; font-weight: 600; color: var(--text-muted); text-transform: uppercase; letter-spacing: .06em; }
+    .form-group input, .form-group select, .form-group textarea {
+      background: var(--black); border: 1px solid var(--border); border-radius: 8px;
+      padding: 11px 14px; color: var(--text); font-size: 14px; font-family: inherit;
+      outline: none; transition: border-color .2s;
+    }
+    .form-group input:focus, .form-group select:focus, .form-group textarea:focus { border-color: var(--green); }
+    .form-group textarea { resize: vertical; min-height: 100px; }
+    .form-group select option { background: var(--black); }
+    .btn-submit {
+      width: 100%; background: var(--green); color: #fff; border: none;
+      padding: 13px; border-radius: 8px; font-size: 15px; font-weight: 700;
+      cursor: pointer; font-family: inherit; transition: background .2s;
+    }
+    .btn-submit:hover { background: var(--green-light); }
+
+    /* ── FOOTER ── */
+    footer {
+      background: var(--black); border-top: 1px solid var(--border);
+      padding: 48px 40px 28px;
+    }
+    .footer-inner { max-width: 1160px; margin: 0 auto; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 24px; }
+    .footer-logo img { height: 36px; filter: brightness(0) invert(1); opacity: .7; }
+    .footer-copy { font-size: 13px; color: var(--text-muted); }
+    .footer-links { display: flex; gap: 24px; }
+    .footer-links a { font-size: 13px; color: var(--text-muted); text-decoration: none; }
+    .footer-links a:hover { color: var(--green-light); }
+
+    /* ── MOBILE ── */
+    @media(max-width: 900px) {
+      nav { padding: 0 20px; }
+      .nav-links { display: none; }
+      .hamburger { display: flex; }
+      .hero { padding: 100px 20px 60px; }
+      .hero-stats { gap: 24px; flex-wrap: wrap; }
+      section { padding: 64px 20px; }
+      .services-grid { grid-template-columns: 1fr; }
+      .gallery-grid { grid-template-columns: 1fr 1fr; }
+      .gallery-grid img:first-child { grid-column: span 2; height: 240px; }
+      .why-grid { grid-template-columns: 1fr; }
+      .why-img img { height: 300px; }
+      .reviews-grid { grid-template-columns: 1fr; }
+      .contact-grid { grid-template-columns: 1fr; }
+      .form-row { grid-template-columns: 1fr; }
+      .footer-inner { flex-direction: column; text-align: center; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <div class="nav-logo">
+    <img src="images/logo.jpg" alt="Always Green Synthetic Turf" style="filter:none;height:48px;">
+  </div>
+  <ul class="nav-links">
+    <li><a href="#services">Services</a></li>
+    <li><a href="#gallery">Gallery</a></li>
+    <li><a href="#why">Why AGST</a></li>
+    <li><a href="#reviews">Reviews</a></li>
+    <li><a href="#contact" class="nav-cta">Get a Quote</a></li>
+  </ul>
+  <button class="hamburger" id="hamburger" onclick="toggleMenu()">
+    <span></span><span></span><span></span>
+  </button>
+</nav>
+<div class="mobile-menu" id="mobileMenu">
+  <a href="#services" onclick="toggleMenu()">Services</a>
+  <a href="#gallery" onclick="toggleMenu()">Gallery</a>
+  <a href="#why" onclick="toggleMenu()">Why AGST</a>
+  <a href="#reviews" onclick="toggleMenu()">Reviews</a>
+  <a href="#contact" onclick="toggleMenu()" style="color:var(--green-light);font-weight:700;">Get a Free Quote →</a>
+</div>
+
+<!-- HERO -->
+<section class="hero" id="home">
+  <div class="hero-bg"></div>
+  <div class="hero-overlay"></div>
+  <div class="hero-content container">
+    <div class="hero-badge">Naples, FL · Southwest Florida's Turf Experts</div>
+    <h1>The <span>Perfect Lawn.</span><br>Zero Maintenance.</h1>
+    <p class="hero-sub">Always Green Synthetic Turf installs premium artificial grass for residential lawns, custom putting greens, pet areas, and more — built to last and look great year-round.</p>
+    <div class="hero-btns">
+      <a href="#contact" class="btn-primary">Get a Free Quote</a>
+      <a href="#gallery" class="btn-outline">View Our Work</a>
+    </div>
+    <div class="hero-stats">
+      <div>
+        <div class="stat-num">5.0★</div>
+        <div class="stat-label">Google Rating</div>
+      </div>
+      <div>
+        <div class="stat-num">100%</div>
+        <div class="stat-label">Satisfaction Rate</div>
+      </div>
+      <div>
+        <div class="stat-num">SW FL</div>
+        <div class="stat-label">Naples & Surrounding Areas</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SERVICES -->
+<section class="services-section" id="services">
+  <div class="container">
+    <div class="section-tag">What We Do</div>
+    <h2>Transforming Outdoor Spaces<br>Across Southwest Florida</h2>
+    <p class="section-sub">From lush residential lawns to tournament-quality putting greens, we install synthetic turf solutions built for Florida's climate and your lifestyle.</p>
+    <div class="services-grid">
+      <div class="service-card">
+        <img src="images/backyard-patio.jpg" alt="Residential Lawn" class="service-img">
+        <div class="service-body">
+          <div class="service-icon">🏡</div>
+          <h3>Residential Lawn Installation</h3>
+          <p>Give your front or back yard a permanent upgrade. Our turf stays thick, green, and beautiful without watering, mowing, or fertilizing — ever.</p>
+        </div>
+      </div>
+      <div class="service-card">
+        <img src="images/putting-large.jpg" alt="Custom Putting Greens" class="service-img">
+        <div class="service-body">
+          <div class="service-icon">⛳</div>
+          <h3>Custom Putting Greens</h3>
+          <p>Practice your short game right in your backyard. We design and install custom-shaped putting greens with multiple cups to match any layout and budget.</p>
+        </div>
+      </div>
+      <div class="service-card">
+        <img src="images/playground.jpg" alt="Pet & Play Areas" class="service-img">
+        <div class="service-body">
+          <div class="service-icon">🐾</div>
+          <h3>Pet & Play Areas</h3>
+          <p>Safe, durable, and easy to clean. Our pet-friendly turf handles heavy use from kids and animals without wearing out — no mud, no mess, no bare patches.</p>
+        </div>
+      </div>
+      <div class="service-card">
+        <img src="images/putting-pool.jpg" alt="Pool Surrounds" class="service-img">
+        <div class="service-body">
+          <div class="service-icon">🏊</div>
+          <h3>Pool Surrounds & Patios</h3>
+          <p>Replace slippery concrete or hot pavers with comfortable, non-slip synthetic turf around your pool area. Stays cool, drains fast, looks stunning.</p>
+        </div>
+      </div>
+      <div class="service-card">
+        <img src="images/landscape-path.jpg" alt="Landscaping" class="service-img">
+        <div class="service-body">
+          <div class="service-icon">🌿</div>
+          <h3>Landscaping & Hardscaping</h3>
+          <p>We integrate synthetic turf with pavers, retaining walls, rock beds, and pathways to create complete outdoor living spaces that are as functional as they are beautiful.</p>
+        </div>
+      </div>
+      <div class="service-card">
+        <img src="images/putting-steppers.jpg" alt="Commercial" class="service-img">
+        <div class="service-body">
+          <div class="service-icon">🏢</div>
+          <h3>Commercial Installations</h3>
+          <p>From HOA common areas to commercial properties, we handle large-scale turf installs with the same attention to detail as every residential project we take on.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- GALLERY -->
+<section class="gallery-section" id="gallery">
+  <div class="container">
+    <div class="section-tag">Our Work</div>
+    <h2>Real Projects.<br>Real Results.</h2>
+    <p class="section-sub">Every installation is custom-designed and built to last. Here's a look at some of our recent work across Southwest Florida.</p>
+    <div class="gallery-grid">
+      <img src="images/putting-clean.jpg" alt="Custom Putting Green Naples FL">
+      <img src="images/lawn-install.jpg" alt="Synthetic Lawn Installation">
+      <img src="images/putting-hottub.jpg" alt="Backyard Putting Green">
+      <img src="images/backyard-patio.jpg" alt="Backyard Synthetic Turf">
+      <img src="images/putting-steppers.jpg" alt="Putting Green with Pavers">
+      <img src="images/landscape-path.jpg" alt="Turf Landscaping">
+    </div>
+  </div>
+</section>
+
+<!-- WHY AGST -->
+<section class="why-section" id="why">
+  <div class="container">
+    <div class="why-grid">
+      <div class="why-img">
+        <img src="images/putting-large.jpg" alt="AGST Quality Installation">
+        <div class="why-img-badge">
+          <div class="big">5.0★</div>
+          <div class="small">Rated on Google</div>
+        </div>
+      </div>
+      <div>
+        <div class="section-tag">Why Choose Us</div>
+        <h2>Built Different.<br>Installed Right.</h2>
+        <p class="section-sub">We don't cut corners. From the base preparation to the final infill, every AGST installation is done with premium materials and professional craftsmanship.</p>
+        <div class="why-list">
+          <div class="why-item">
+            <div class="why-check">✓</div>
+            <div>
+              <h4>Premium Turf Materials</h4>
+              <p>We only use high-grade synthetic turf products built for Florida's UV exposure, heat, and heavy rainfall — guaranteed to stay lush for years.</p>
+            </div>
+          </div>
+          <div class="why-item">
+            <div class="why-check">✓</div>
+            <div>
+              <h4>Custom-Designed Layouts</h4>
+              <p>No cookie-cutter installs. Every project is designed to fit your exact space, style, and intended use — whether it's a lawn, putting green, or full backyard.</p>
+            </div>
+          </div>
+          <div class="why-item">
+            <div class="why-check">✓</div>
+            <div>
+              <h4>Zero Maintenance Required</h4>
+              <p>No watering, no mowing, no fertilizing. Just a permanently green, clean outdoor space that saves you time and money every single month.</p>
+            </div>
+          </div>
+          <div class="why-item">
+            <div class="why-check">✓</div>
+            <div>
+              <h4>Locally Operated, Naples Based</h4>
+              <p>We're your neighbors. Based right here in Golden Gate, Naples — we know the Florida landscape and stand behind every job we complete.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- TESTIMONIALS -->
+<section class="testimonials-section" id="reviews">
+  <div class="container">
+    <div class="section-tag">Customer Reviews</div>
+    <h2>What Our Customers Say</h2>
+    <p class="section-sub">Don't take our word for it. Here's what homeowners across Southwest Florida have to say about working with AGST.</p>
+    <div class="reviews-grid">
+      <div class="review-card">
+        <div class="stars">★★★★★</div>
+        <p class="review-text">"Absolutely love our new putting green. The crew was professional, fast, and the quality is outstanding. Our backyard has been completely transformed — best investment we've made in the house."</p>
+        <div class="reviewer">Michael T. <span>· Naples, FL</span></div>
+      </div>
+      <div class="review-card">
+        <div class="stars">★★★★★</div>
+        <p class="review-text">"We had our entire backyard done with synthetic turf and pavers. The result is incredible — looks better than real grass and we haven't had to touch it since. Highly recommend AGST."</p>
+        <div class="reviewer">Jennifer R. <span>· Golden Gate, FL</span></div>
+      </div>
+      <div class="review-card">
+        <div class="stars">★★★★★</div>
+        <p class="review-text">"Our dogs destroyed every lawn we ever had. AGST installed pet turf around the pool and it's been perfect. Drains fast, stays clean, and our dogs love it. Worth every penny."</p>
+        <div class="reviewer">Carlos M. <span>· Marco Island, FL</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA BANNER -->
+<section class="cta-section">
+  <div class="container">
+    <h2>Ready to Go Always Green?</h2>
+    <p>Get a free estimate for your lawn, putting green, or outdoor project.<br>We serve Naples and all of Southwest Florida.</p>
+    <a href="#contact" class="btn-primary" style="font-size:16px;padding:16px 36px;">Get Your Free Quote Today</a>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section class="contact-section" id="contact">
+  <div class="container">
+    <div class="contact-grid">
+      <div>
+        <div class="section-tag">Get In Touch</div>
+        <h2>Free Estimates.<br>No Pressure.</h2>
+        <p class="section-sub">Fill out the form and we'll get back to you quickly with a free quote. Or give us a call during business hours.</p>
+        <div class="contact-info">
+          <div class="contact-item">
+            <div class="contact-icon">📍</div>
+            <div>
+              <h4>Address</h4>
+              <p>2879 44th St SW, Naples, FL 34116</p>
+            </div>
+          </div>
+          <div class="contact-item">
+            <div class="contact-icon">📞</div>
+            <div>
+              <h4>Phone</h4>
+              <a href="tel:5614013257">(561) 401-3257</a>
+            </div>
+          </div>
+          <div class="contact-item">
+            <div class="contact-icon">🕐</div>
+            <div>
+              <h4>Business Hours</h4>
+              <p>Mon–Wed: 8:00 AM – 4:30 PM<br>
+                 Thu: 8:00 AM – 5:30 PM<br>
+                 Fri: 8:00 AM – 4:30 PM<br>
+                 Sat: 9:00 AM – 4:00 PM<br>
+                 Sun: Closed</p>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="contact-form">
+        <h3>Request a Free Quote</h3>
+        <div class="form-row">
+          <div class="form-group">
+            <label>First Name</label>
+            <input type="text" placeholder="John">
+          </div>
+          <div class="form-group">
+            <label>Last Name</label>
+            <input type="text" placeholder="Smith">
+          </div>
+        </div>
+        <div class="form-group">
+          <label>Phone</label>
+          <input type="tel" placeholder="(239) 555-0000">
+        </div>
+        <div class="form-group">
+          <label>Email</label>
+          <input type="email" placeholder="john@email.com">
+        </div>
+        <div class="form-group">
+          <label>Service Needed</label>
+          <select>
+            <option value="">Select a service...</option>
+            <option>Residential Lawn Installation</option>
+            <option>Custom Putting Green</option>
+            <option>Pet & Play Area</option>
+            <option>Pool Surround</option>
+            <option>Landscaping & Hardscaping</option>
+            <option>Commercial Installation</option>
+            <option>Other</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label>Tell us about your project</label>
+          <textarea placeholder="Approximate square footage, timeline, any specific details..."></textarea>
+        </div>
+        <button class="btn-submit">Send My Request →</button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-inner">
+    <div class="footer-logo">
+      <img src="images/logo.jpg" alt="AGST" style="filter:none;height:36px;opacity:0.85;">
+    </div>
+    <p class="footer-copy">© 2026 Always Green Synthetic Turf · Naples, FL · All rights reserved</p>
+    <div class="footer-links">
+      <a href="#services">Services</a>
+      <a href="#gallery">Gallery</a>
+      <a href="#contact">Contact</a>
+    </div>
+  </div>
+</footer>
+
+<script>
+  function toggleMenu() {
+    document.getElementById('mobileMenu').classList.toggle('open');
+  }
+  // Sticky nav shadow on scroll
+  window.addEventListener('scroll', () => {
+    document.querySelector('nav').style.boxShadow = window.scrollY > 10 ? '0 4px 24px rgba(0,0,0,.4)' : 'none';
+  });
+</script>
+</body>
+</html>
