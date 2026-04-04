@@ -58,7 +58,7 @@
       position: relative; overflow: hidden; padding: 120px 40px 80px;
     }
     .hero-bg {
-      position: absolute; inset: -30px;
+      position: absolute; inset: -60px;
       background: url('images/putting-pool.jpg') center/cover no-repeat;
       filter: brightness(0.35);
       will-change: transform;
@@ -586,8 +586,8 @@
   const heroBg = document.querySelector('.hero-bg');
   document.querySelector('.hero').addEventListener('mousemove', e => {
     const { innerWidth: w, innerHeight: h } = window;
-    const x = (e.clientX / w - 0.5) * 22;  // -11 to +11px
-    const y = (e.clientY / h - 0.5) * 14;  // -7  to +7px
+    const x = (e.clientX / w - 0.5) * 50;  // -25 to +25px
+    const y = (e.clientY / h - 0.5) * 34;  // -17 to +17px
     gsap.to(heroBg, { x, y, duration: 1.2, ease: 'power2.out' });
   });
   document.querySelector('.hero').addEventListener('mouseleave', () => {
