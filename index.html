@@ -217,6 +217,36 @@
     .footer-links a:hover { color: var(--green-light); }
 
 
+
+    /* ── CUSTOM CURSOR ── */
+    * { cursor: none !important; }
+    .cursor-dot {
+      width: 10px; height: 10px; background: var(--green-light);
+      border-radius: 50%; position: fixed; pointer-events: none; z-index: 9999;
+      transform: translate(-50%,-50%); transition: width .15s, height .15s, background .15s;
+      mix-blend-mode: normal;
+    }
+    .cursor-ring {
+      width: 36px; height: 36px; border: 1.5px solid rgba(76,184,76,0.6);
+      border-radius: 50%; position: fixed; pointer-events: none; z-index: 9998;
+      transform: translate(-50%,-50%); transition: width .25s, height .25s, border-color .25s;
+    }
+    body:has(.btn-primary:hover) .cursor-dot,
+    body:has(.btn-outline:hover) .cursor-dot,
+    body:has(a:hover) .cursor-dot { width: 18px; height: 18px; }
+    body:has(.btn-primary:hover) .cursor-ring,
+    body:has(.btn-outline:hover) .cursor-ring,
+    body:has(a:hover) .cursor-ring { width: 54px; height: 54px; border-color: var(--green-light); }
+
+    /* ── GHOST TEXT ── */
+    .ghost-text {
+      position: absolute; left: 50%; transform: translateX(-50%);
+      font-size: clamp(80px, 14vw, 160px); font-weight: 900;
+      color: transparent; -webkit-text-stroke: 1px rgba(76,184,76,0.07);
+      white-space: nowrap; pointer-events: none; user-select: none;
+      z-index: 0; letter-spacing: -.02em; line-height: 1;
+      top: 50%; margin-top: -0.5em;
+    }
     /* ── MARQUEE TICKER ── */
     .marquee-section { background: var(--green-mid); padding: 20px 0; overflow: hidden; border-top: 1px solid rgba(76,184,76,0.2); border-bottom: 1px solid rgba(76,184,76,0.2); }
     .marquee-track { display: flex; gap: 0; white-space: nowrap; }
@@ -255,6 +285,11 @@
   </style>
 </head>
 <body>
+
+
+<!-- CUSTOM CURSOR -->
+<div class="cursor-dot" id="cursorDot"></div>
+<div class="cursor-ring" id="cursorRing"></div>
 
 <!-- NAV -->
 <nav>
@@ -310,7 +345,8 @@
 </section>
 
 <!-- SERVICES -->
-<section class="services-section" id="services">
+<section class="services-section" id="services" style="position:relative;overflow:hidden;">
+  <div class="ghost-text">Services</div>
   <div class="container">
     <div class="section-tag">What We Do</div>
     <h2>Transforming Outdoor Spaces<br>Across Southwest Florida</h2>
@@ -398,7 +434,8 @@
 </div>
 
 <!-- GALLERY -->
-<section class="gallery-section" id="gallery">
+<section class="gallery-section" id="gallery" style="position:relative;overflow:hidden;">
+  <div class="ghost-text">Our Work</div>
   <div class="container">
     <div class="section-tag">Our Work</div>
     <h2>Real Projects.<br>Real Results.</h2>
@@ -421,7 +458,8 @@
 </section>
 
 <!-- WHY AGST -->
-<section class="why-section" id="why">
+<section class="why-section" id="why" style="position:relative;overflow:hidden;">
+  <div class="ghost-text">Why AGST</div>
   <div class="container">
     <div class="why-grid">
       <div class="why-img">
@@ -471,7 +509,8 @@
 </section>
 
 <!-- TESTIMONIALS -->
-<section class="testimonials-section" id="reviews">
+<section class="testimonials-section" id="reviews" style="position:relative;overflow:hidden;">
+  <div class="ghost-text">Reviews</div>
   <div class="container">
     <div class="section-tag">Customer Reviews</div>
     <h2>What Our Customers Say</h2>
@@ -735,6 +774,32 @@
     section.appendChild(orb);
     /* slow float */
     gsap.to(orb, { y: '-=30', duration: 4, yoyo: true, repeat: -1, ease: 'sine.inOut' });
+  });
+
+  /* ── Custom cursor ── */
+  const dot  = document.getElementById('cursorDot');
+  const ring = document.getElementById('cursorRing');
+  let mx = 0, my = 0, rx = 0, ry = 0;
+  window.addEventListener('mousemove', e => { mx = e.clientX; my = e.clientY; });
+  (function animCursor() {
+    rx += (mx - rx) * 0.12;
+    ry += (my - ry) * 0.12;
+    dot.style.left  = mx + 'px';
+    dot.style.top   = my + 'px';
+    ring.style.left = rx + 'px';
+    ring.style.top  = ry + 'px';
+    requestAnimationFrame(animCursor);
+  })();
+  document.addEventListener('mouseleave', () => { dot.style.opacity = 0; ring.style.opacity = 0; });
+  document.addEventListener('mouseenter', () => { dot.style.opacity = 1; ring.style.opacity = 1; });
+
+  /* ── Ghost text parallax on scroll ── */
+  gsap.utils.toArray('.ghost-text').forEach(el => {
+    gsap.to(el, {
+      xPercent: -52,
+      ease: 'none',
+      scrollTrigger: { trigger: el.parentElement, start: 'top bottom', end: 'bottom top', scrub: 1.5 }
+    });
   });
 
   /* ── Word-by-word reveal on h1 ── */
