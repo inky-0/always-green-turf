@@ -216,6 +216,24 @@
     .footer-links a { font-size: 13px; color: var(--text-muted); text-decoration: none; }
     .footer-links a:hover { color: var(--green-light); }
 
+
+    /* ── MARQUEE TICKER ── */
+    .marquee-section { background: var(--green-mid); padding: 20px 0; overflow: hidden; border-top: 1px solid rgba(76,184,76,0.2); border-bottom: 1px solid rgba(76,184,76,0.2); }
+    .marquee-track { display: flex; gap: 0; white-space: nowrap; }
+    .marquee-inner { display: flex; gap: 0; animation: marquee-scroll 22s linear infinite; }
+    .marquee-item { display: inline-flex; align-items: center; gap: 12px; padding: 0 36px; font-size: 14px; font-weight: 700; color: rgba(238,245,238,0.85); letter-spacing: .06em; text-transform: uppercase; }
+    .marquee-dot { width: 5px; height: 5px; background: var(--green-light); border-radius: 50%; flex-shrink: 0; }
+    @keyframes marquee-scroll { from { transform: translateX(0); } to { transform: translateX(-50%); } }
+
+    /* ── MAGNETIC BUTTON ── */
+    .btn-primary, .btn-outline, .btn-submit { cursor: pointer; }
+
+    /* ── WORD REVEAL ── */
+    .reveal-word { display: inline-block; overflow: hidden; }
+    .reveal-word span { display: inline-block; transform: translateY(110%); opacity: 0; }
+
+    /* ── IMAGE WIPE REVEAL ── */
+    .gallery-grid img { clip-path: inset(100% 0 0 0); }
     /* ── MOBILE ── */
     @media(max-width: 900px) {
       nav { padding: 0 20px; }
@@ -349,6 +367,35 @@
     </div>
   </div>
 </section>
+
+
+<!-- MARQUEE -->
+<div class="marquee-section">
+  <div class="marquee-track">
+    <div class="marquee-inner" id="marqueeInner">
+      <span class="marquee-item"><span class="marquee-dot"></span>Residential Lawns</span>
+      <span class="marquee-item"><span class="marquee-dot"></span>Custom Putting Greens</span>
+      <span class="marquee-item"><span class="marquee-dot"></span>Pet-Friendly Turf</span>
+      <span class="marquee-item"><span class="marquee-dot"></span>Pool Surrounds</span>
+      <span class="marquee-item"><span class="marquee-dot"></span>Landscaping & Hardscaping</span>
+      <span class="marquee-item"><span class="marquee-dot"></span>Commercial Installs</span>
+      <span class="marquee-item"><span class="marquee-dot"></span>Naples, FL</span>
+      <span class="marquee-item"><span class="marquee-dot"></span>Southwest Florida</span>
+      <span class="marquee-item"><span class="marquee-dot"></span>5.0★ Rated</span>
+      <span class="marquee-item"><span class="marquee-dot"></span>Free Estimates</span>
+      <span class="marquee-item"><span class="marquee-dot"></span>Residential Lawns</span>
+      <span class="marquee-item"><span class="marquee-dot"></span>Custom Putting Greens</span>
+      <span class="marquee-item"><span class="marquee-dot"></span>Pet-Friendly Turf</span>
+      <span class="marquee-item"><span class="marquee-dot"></span>Pool Surrounds</span>
+      <span class="marquee-item"><span class="marquee-dot"></span>Landscaping & Hardscaping</span>
+      <span class="marquee-item"><span class="marquee-dot"></span>Commercial Installs</span>
+      <span class="marquee-item"><span class="marquee-dot"></span>Naples, FL</span>
+      <span class="marquee-item"><span class="marquee-dot"></span>Southwest Florida</span>
+      <span class="marquee-item"><span class="marquee-dot"></span>5.0★ Rated</span>
+      <span class="marquee-item"><span class="marquee-dot"></span>Free Estimates</span>
+    </div>
+  </div>
+</div>
 
 <!-- GALLERY -->
 <section class="gallery-section" id="gallery">
@@ -637,11 +684,7 @@
     });
   });
 
-  /* ── Gallery images: stagger reveal ── */
-  gsap.from('.gallery-grid img', {
-    scale: 0.9, opacity: 0, stagger: 0.07, duration: 0.6, ease: 'power3.out',
-    scrollTrigger: { trigger: '.gallery-grid', start: 'top 82%', once: true }
-  });
+  /* ── Gallery: handled by wipe reveal below ── */
 
   /* ── Why section: left image + right list slide in from sides ── */
   gsap.from('.why-img', {
@@ -693,6 +736,49 @@
     /* slow float */
     gsap.to(orb, { y: '-=30', duration: 4, yoyo: true, repeat: -1, ease: 'sine.inOut' });
   });
+
+  /* ── Word-by-word reveal on h1 ── */
+  const h1 = document.querySelector('h1');
+  if (h1) {
+    const html = h1.innerHTML;
+    const wrapped = html.replace(/(\S+)/g, '<span class="reveal-word"><span>$1</span></span>');
+    h1.innerHTML = wrapped;
+    gsap.to('h1 .reveal-word span', {
+      y: 0, opacity: 1,
+      stagger: 0.06, duration: 0.65, ease: 'power3.out', delay: 0.5
+    });
+  }
+
+  /* ── Image wipe/curtain reveal in gallery ── */
+  gsap.utils.toArray('.gallery-grid img').forEach((img, i) => {
+    gsap.to(img, {
+      clipPath: 'inset(0% 0 0 0)',
+      duration: 0.9,
+      ease: 'power4.inOut',
+      delay: i * 0.06,
+      scrollTrigger: { trigger: img, start: 'top 88%', once: true }
+    });
+  });
+
+  /* ── Magnetic buttons ── */
+  document.querySelectorAll('.btn-primary, .btn-outline, .nav-cta').forEach(btn => {
+    btn.addEventListener('mousemove', e => {
+      const rect = btn.getBoundingClientRect();
+      const x = (e.clientX - rect.left - rect.width  / 2) * 0.35;
+      const y = (e.clientY - rect.top  - rect.height / 2) * 0.35;
+      gsap.to(btn, { x, y, duration: 0.3, ease: 'power2.out' });
+    });
+    btn.addEventListener('mouseleave', () => {
+      gsap.to(btn, { x: 0, y: 0, duration: 0.6, ease: 'elastic.out(1, 0.4)' });
+    });
+  });
+
+  /* ── Marquee pause on hover ── */
+  const marqueeInner = document.getElementById('marqueeInner');
+  if (marqueeInner) {
+    marqueeInner.addEventListener('mouseenter', () => marqueeInner.style.animationPlayState = 'paused');
+    marqueeInner.addEventListener('mouseleave', () => marqueeInner.style.animationPlayState = 'running');
+  }
 
   /* ── Nav shadow on scroll ── */
   window.addEventListener('scroll', () => {
