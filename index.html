@@ -76,7 +76,8 @@
       letter-spacing: .04em; text-transform: uppercase;
     }
     .hero-badge::before { content: ''; width: 6px; height: 6px; background: var(--green-light); border-radius: 50%; }
-    h1 { font-size: clamp(2.4rem, 5vw, 3.6rem); font-weight: 900; line-height: 1.1; color: var(--white); margin-bottom: 20px; }
+    h1 { font-size: clamp(2.4rem, 5vw, 3.6rem); font-weight: 900; line-height: 1.15; color: var(--white); margin-bottom: 20px; }
+    h1 .h1-line { display: block; overflow: hidden; }
     h1 span { color: var(--green-light); }
     .hero-sub { font-size: 18px; color: rgba(238,245,238,0.75); margin-bottom: 36px; max-width: 540px; line-height: 1.7; }
     .hero-btns { display: flex; gap: 14px; flex-wrap: wrap; }
@@ -218,26 +219,6 @@
 
 
 
-    /* ── CUSTOM CURSOR ── */
-    * { cursor: none !important; }
-    .cursor-dot {
-      width: 10px; height: 10px; background: var(--green-light);
-      border-radius: 50%; position: fixed; pointer-events: none; z-index: 9999;
-      transform: translate(-50%,-50%); transition: width .15s, height .15s, background .15s;
-      mix-blend-mode: normal;
-    }
-    .cursor-ring {
-      width: 36px; height: 36px; border: 1.5px solid rgba(76,184,76,0.6);
-      border-radius: 50%; position: fixed; pointer-events: none; z-index: 9998;
-      transform: translate(-50%,-50%); transition: width .25s, height .25s, border-color .25s;
-    }
-    body:has(.btn-primary:hover) .cursor-dot,
-    body:has(.btn-outline:hover) .cursor-dot,
-    body:has(a:hover) .cursor-dot { width: 18px; height: 18px; }
-    body:has(.btn-primary:hover) .cursor-ring,
-    body:has(.btn-outline:hover) .cursor-ring,
-    body:has(a:hover) .cursor-ring { width: 54px; height: 54px; border-color: var(--green-light); }
-
     /* ── GHOST TEXT ── */
     .ghost-text {
       position: absolute; left: 50%; transform: translateX(-50%);
@@ -247,20 +228,8 @@
       z-index: 0; letter-spacing: -.02em; line-height: 1;
       top: 50%; margin-top: -0.5em;
     }
-    /* ── MARQUEE TICKER ── */
-    .marquee-section { background: var(--green-mid); padding: 20px 0; overflow: hidden; border-top: 1px solid rgba(76,184,76,0.2); border-bottom: 1px solid rgba(76,184,76,0.2); }
-    .marquee-track { display: flex; gap: 0; white-space: nowrap; }
-    .marquee-inner { display: flex; gap: 0; animation: marquee-scroll 22s linear infinite; }
-    .marquee-item { display: inline-flex; align-items: center; gap: 12px; padding: 0 36px; font-size: 14px; font-weight: 700; color: rgba(238,245,238,0.85); letter-spacing: .06em; text-transform: uppercase; }
-    .marquee-dot { width: 5px; height: 5px; background: var(--green-light); border-radius: 50%; flex-shrink: 0; }
-    @keyframes marquee-scroll { from { transform: translateX(0); } to { transform: translateX(-50%); } }
-
     /* ── MAGNETIC BUTTON ── */
     .btn-primary, .btn-outline, .btn-submit { cursor: pointer; }
-
-    /* ── WORD REVEAL ── */
-    .reveal-word { display: inline-block; overflow: hidden; }
-    .reveal-word span { display: inline-block; transform: translateY(110%); opacity: 0; }
 
     /* ── IMAGE WIPE REVEAL ── */
     .gallery-grid img { clip-path: inset(100% 0 0 0); }
@@ -285,11 +254,6 @@
   </style>
 </head>
 <body>
-
-
-<!-- CUSTOM CURSOR -->
-<div class="cursor-dot" id="cursorDot"></div>
-<div class="cursor-ring" id="cursorRing"></div>
 
 <!-- NAV -->
 <nav>
@@ -321,7 +285,7 @@
   <div class="hero-overlay"></div>
   <div class="hero-content container">
     <div class="hero-badge">Naples, FL · Southwest Florida's Turf Experts</div>
-    <h1>The <span>Perfect Lawn.</span><br>Zero Maintenance.</h1>
+    <h1><div class="h1-line">The Perfect Lawn.</div><div class="h1-line">Zero Maintenance.</div></h1>
     <p class="hero-sub">Always Green Synthetic Turf installs premium artificial grass for residential lawns, custom putting greens, pet areas, and more — built to last and look great year-round.</p>
     <div class="hero-btns">
       <a href="#contact" class="btn-primary">Get a Free Quote</a>
@@ -404,34 +368,6 @@
   </div>
 </section>
 
-
-<!-- MARQUEE -->
-<div class="marquee-section">
-  <div class="marquee-track">
-    <div class="marquee-inner" id="marqueeInner">
-      <span class="marquee-item"><span class="marquee-dot"></span>Residential Lawns</span>
-      <span class="marquee-item"><span class="marquee-dot"></span>Custom Putting Greens</span>
-      <span class="marquee-item"><span class="marquee-dot"></span>Pet-Friendly Turf</span>
-      <span class="marquee-item"><span class="marquee-dot"></span>Pool Surrounds</span>
-      <span class="marquee-item"><span class="marquee-dot"></span>Landscaping & Hardscaping</span>
-      <span class="marquee-item"><span class="marquee-dot"></span>Commercial Installs</span>
-      <span class="marquee-item"><span class="marquee-dot"></span>Naples, FL</span>
-      <span class="marquee-item"><span class="marquee-dot"></span>Southwest Florida</span>
-      <span class="marquee-item"><span class="marquee-dot"></span>5.0★ Rated</span>
-      <span class="marquee-item"><span class="marquee-dot"></span>Free Estimates</span>
-      <span class="marquee-item"><span class="marquee-dot"></span>Residential Lawns</span>
-      <span class="marquee-item"><span class="marquee-dot"></span>Custom Putting Greens</span>
-      <span class="marquee-item"><span class="marquee-dot"></span>Pet-Friendly Turf</span>
-      <span class="marquee-item"><span class="marquee-dot"></span>Pool Surrounds</span>
-      <span class="marquee-item"><span class="marquee-dot"></span>Landscaping & Hardscaping</span>
-      <span class="marquee-item"><span class="marquee-dot"></span>Commercial Installs</span>
-      <span class="marquee-item"><span class="marquee-dot"></span>Naples, FL</span>
-      <span class="marquee-item"><span class="marquee-dot"></span>Southwest Florida</span>
-      <span class="marquee-item"><span class="marquee-dot"></span>5.0★ Rated</span>
-      <span class="marquee-item"><span class="marquee-dot"></span>Free Estimates</span>
-    </div>
-  </div>
-</div>
 
 <!-- GALLERY -->
 <section class="gallery-section" id="gallery" style="position:relative;overflow:hidden;">
@@ -776,23 +712,6 @@
     gsap.to(orb, { y: '-=30', duration: 4, yoyo: true, repeat: -1, ease: 'sine.inOut' });
   });
 
-  /* ── Custom cursor ── */
-  const dot  = document.getElementById('cursorDot');
-  const ring = document.getElementById('cursorRing');
-  let mx = 0, my = 0, rx = 0, ry = 0;
-  window.addEventListener('mousemove', e => { mx = e.clientX; my = e.clientY; });
-  (function animCursor() {
-    rx += (mx - rx) * 0.12;
-    ry += (my - ry) * 0.12;
-    dot.style.left  = mx + 'px';
-    dot.style.top   = my + 'px';
-    ring.style.left = rx + 'px';
-    ring.style.top  = ry + 'px';
-    requestAnimationFrame(animCursor);
-  })();
-  document.addEventListener('mouseleave', () => { dot.style.opacity = 0; ring.style.opacity = 0; });
-  document.addEventListener('mouseenter', () => { dot.style.opacity = 1; ring.style.opacity = 1; });
-
   /* ── Ghost text parallax on scroll ── */
   gsap.utils.toArray('.ghost-text').forEach(el => {
     gsap.to(el, {
@@ -802,17 +721,10 @@
     });
   });
 
-  /* ── Word-by-word reveal on h1 ── */
-  const h1 = document.querySelector('h1');
-  if (h1) {
-    const html = h1.innerHTML;
-    const wrapped = html.replace(/(\S+)/g, '<span class="reveal-word"><span>$1</span></span>');
-    h1.innerHTML = wrapped;
-    gsap.to('h1 .reveal-word span', {
-      y: 0, opacity: 1,
-      stagger: 0.06, duration: 0.65, ease: 'power3.out', delay: 0.5
-    });
-  }
+  /* ── Line-by-line h1 reveal ── */
+  gsap.from('h1 .h1-line', {
+    y: '110%', opacity: 0, stagger: 0.18, duration: 0.9, ease: 'power4.out', delay: 0.4
+  });
 
   /* ── Image wipe/curtain reveal in gallery ── */
   gsap.utils.toArray('.gallery-grid img').forEach((img, i) => {
@@ -837,13 +749,6 @@
       gsap.to(btn, { x: 0, y: 0, duration: 0.6, ease: 'elastic.out(1, 0.4)' });
     });
   });
-
-  /* ── Marquee pause on hover ── */
-  const marqueeInner = document.getElementById('marqueeInner');
-  if (marqueeInner) {
-    marqueeInner.addEventListener('mouseenter', () => marqueeInner.style.animationPlayState = 'paused');
-    marqueeInner.addEventListener('mouseleave', () => marqueeInner.style.animationPlayState = 'running');
-  }
 
   /* ── Nav shadow on scroll ── */
   window.addEventListener('scroll', () => {
